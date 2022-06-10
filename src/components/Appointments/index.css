@@ -1,0 +1,142 @@
+.app-container {
+  background-image: linear-gradient(#fbc7d4, #9796f0);
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-container {
+  width: 90%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .appointment-container {
+    width: 70%;
+  }
+}
+
+.appointment-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 25px;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+.main-heading {
+  font-family: 'Roboto';
+  font-size: 28px;
+  color: #171f46;
+  font-weight: 500;
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-description {
+  color: #b5b7c4;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.text-input {
+  width: 100%;
+  height: 40px;
+  color: #b5b7c4;
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
+.submit-button {
+  background-color: #8b5cf6;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 16px;
+  height: 40px;
+  width: 90px;
+  border-style: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.image-container {
+  display: none;
+  margin-right: 40px;
+}
+@media screen and (min-width: 768px) {
+  .image-container {
+    display: contents;
+  }
+}
+
+.image {
+  height: 250px;
+  width: 250px;
+}
+
+.line {
+  border-color: #b5b7c4;
+  border-width: 1px;
+  color: #b5b7c4;
+  width: 2px;
+}
+
+.appointment-list-container {
+  display: flex;
+  margin-left: 50px;
+  flex-direction: column;
+}
+.appointment-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.appointment-heading {
+  font-family: 'Roboto';
+  font-size: 22px;
+  color: #171f46;
+  font-weight: 500;
+  text-align: center;
+}
+.starred-button {
+  background-color: #ffffff;
+  color: #8b5cf6;
+  font-family: 'Roboto';
+  font-size: 16px;
+  height: 25px;
+  width: 90px;
+  border-style: solid;
+  cursor: pointer;
+  outline: none;
+  border-color: #8b5cf6;
+  border-radius: 8px;
+  margin-right: 35px;
+  margin-top: 20px;
+}
+.appointment-list {
+  margin: 15px;
+  list-style-type: none;
+}
+
+.appointment-list-items {
+  display: flex;
+  flex-direction: row;
+}
