@@ -1,14 +1,37 @@
 // Write your code here
 
 import {Component} from 'react'
-import './index.css'
+
 import {v4} from 'uuid'
+import {format} from 'date-fns'
+import AppointmentItem from '../AppointmentItem/index'
+import './index.css'
 
 class Appointments extends Component {
   state = {
     textInput: '',
     dateInput: '',
     appointment: [],
+    isFilterActive: false,
+  }
+
+  toggleStarImage = id => {
+    this.setState(prevState => ({
+      appointment: prevState.appointment.map(eachAppointment => {
+        if (id === eachAppointment.id) {
+          return {...eachAppointment, isStarred: !eachAppointment.isStarred}
+        }
+        return eachAppointment
+      }),
+    }))
+  }
+
+  onFilter = () => {
+    const {isFilterActive} = this.state
+
+    this.setState({
+      isFilterActive: !isFilterActive,
+    })
   }
 
   onChangeTextInput = event => {
@@ -38,13 +61,28 @@ class Appointments extends Component {
     }
     this.setState(prevState => ({
       appointment: [...prevState.appointment, newAppointment],
-      title: '',
-      date: '',
+      textInput: '',
+      dateInput: '',
     }))
   }
 
+  getFilteredAppointment = () => {
+    const {appointment, isFilterActive} = this.state
+
+    if (isFilterActive) {
+      return appointment.filter(
+        eachAppointment => eachAppointment.isStarred === true,
+      )
+    }
+    return appointment
+  }
+
   render() {
-    const {textInput, dateInput} = this.state
+    const {textInput, dateInput, isFilterActive} = this.state
+
+    const filterClassName = isFilterActive ? 'filter-filled' : 'filter-empty'
+
+    const filteredAppointmentsList = this.getFilteredAppointment()
 
     return (
       <div className="app-container">
@@ -52,28 +90,30 @@ class Appointments extends Component {
           <div className="appointment-input-container">
             <div className="input-container">
               <h1 className="main-heading">Add Appointment </h1>
-              <form className="form">
-                <p className="input-description"> Title </p>
+              <form className="form" onSubmit={this.onSubmitForm}>
+                <label htmlFor="input" className="input-description">
+                  Title
+                </label>
                 <input
                   type="text"
+                  id="input"
                   className="text-input"
                   placeholder="Title"
                   value={textInput}
                   onChange={this.onChangeTextInput}
                 />
-                <p className="input-description"> Date </p>
+                <label htmlFor="date" className="input-description">
+                  Date
+                </label>
                 <input
                   type="date"
+                  id="date"
                   className="date-input"
                   placeholder="dd/mm/yyyy"
                   value={dateInput}
                   onChange={this.onChangeDateInput}
                 />
-                <button
-                  className="submit-button"
-                  type="button"
-                  onSubmit={this.onSubmitForm}
-                >
+                <button className="submit-button" type="submit">
                   Add
                 </button>
               </form>
@@ -89,15 +129,23 @@ class Appointments extends Component {
           <hr className="line" />
           <div className="appointment-list-container">
             <div className="appointment-header">
-              <p className="appointment-heading"> Appointments </p>
-              <button className="starred-button" type="button">
+              <h1 className="appointment-heading"> Appointments </h1>
+              <button
+                className={`starred-button ${filterClassName}`}
+                type="button"
+                onClick={this.onFilter}
+              >
                 Starred
               </button>
             </div>
-            <ul className="appointment-list">
-              <li className="appointment-list-items">
-                {this.getAppointmentList()}
-              </li>
+            <ul className="appointments-list">
+              {filteredAppointmentsList.map(eachAppointment => (
+                <AppointmentItem
+                  eachAppointment={eachAppointment}
+                  key={eachAppointment.id}
+                  toggleStarImage={this.toggleStarImage}
+                />
+              ))}
             </ul>
           </div>
         </div>

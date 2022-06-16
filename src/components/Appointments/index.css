@@ -56,8 +56,8 @@
 
 .text-input {
   width: 100%;
-  height: 40px;
-  color: #b5b7c4;
+  height: 30px;
+  color: #171f46;
   font-family: 'Roboto';
   font-size: 16px;
 }
@@ -131,12 +131,29 @@
   margin-right: 35px;
   margin-top: 20px;
 }
-.appointment-list {
-  margin: 15px;
-  list-style-type: none;
+
+.filter-filled {
+  color: #ffffff;
+  background-color: #9897f0;
 }
 
-.appointment-list-items {
+.filter-empty {
+  color: #9897f0;
+  background-color: white;
+  border: 1px solid #9897f0;
+}
+
+.appointments-list {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  padding: 0px;
+  margin-top: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .appointments-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
